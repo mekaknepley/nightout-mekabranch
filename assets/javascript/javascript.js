@@ -48,12 +48,95 @@ firebase.auth().onAuthStateChanged(function(user) {
   }
 });
 
+$("#eventBriteButton").click(function(){
+    var token = "R6QQVF4RQTZXWE5XVPC5";
+    // https://www.eventbriteapi.com/v3/events/search/?location.address=Raleigh&token=R6QQVF4RQTZXWE5XVPC5
+    var queryURL = `https://www.eventbriteapi.com/v3/events/search/?location.address=${userCity}&start_date.keyword=today&token=${token}`;
+    console.log(queryURL);
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).done(function(data){
+        console.log(data);
+        $("#eventBriteDescription0").html(data.events[0].name.html);
+        $("#eventBriteDescription1").html(data.events[1].name.html);
+        $("#eventBriteDescription2").html(data.events[2].name.html);
+    });
+});
+
+$("#signUpButton").click(function(){
+    var email = $("#emailInput").val().trim();
+    var password = $("#passwordInput").val().trim();
+    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+  // ...
+    });
+
+});
+
 $("#signOut").click(function(){
     firebase.auth().signOut().then(function() {
     // Sign-out successful.
     firebaseUser = undefined;
     }).catch(function(error) {
     // An error happened.
+    });
+});
+
+$("#signInForm").submit(function(event){
+    event.preventDefault();
+    var email = $("#emailInput").val().trim();
+    var password = $("#passwordInput").val().trim();
+    firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+  // Handle Errors here.
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  // ...
+});
+});
+
+$("#signInFaceBook").click(function(){
+    var provider = new firebase.auth.FacebookAuthProvider();
+    firebase.auth().signInWithPopup(provider).then(function(result) {
+  // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+  var token = result.credential.accessToken;
+  // The signed-in user info.
+  var user = result.user;
+  // ...
+}).catch(function(error) {
+  // Handle Errors here.
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  // The email of the user's account used.
+  var email = error.email;
+  // The firebase.auth.AuthCredential type that was used.
+  var credential = error.credential;
+  // ...
+});
+
+});
+
+$("#signInTwitter").click(function(){
+    var provider = new firebase.auth.TwitterAuthProvider();
+    firebase.auth().signInWithPopup(provider).then(function(result) {
+        // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
+        // You can use these server side with your app's credentials to access the Twitter API.
+        var token = result.credential.accessToken;
+        var secret = result.credential.secret;
+        // The signed-in user info.
+        var user = result.user;
+        // ...
+    }).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        // ...
     });
 });
 
@@ -117,16 +200,16 @@ $("#weatherButton").click(function(){
 // SOC31MI8AVBkGCnk6At0ScKs8qxdhl3CWtDfX7BF1OoTgSPBUbGONwhNb1i8Ozy1
 
 $(".dateNightButton").click(function(){
-    var queryURL = 
+    var queryURL = "";
 });
 
 
- function signOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-      console.log('User signed out.');
-    });
-  }
+//  function signOut() {
+//     var auth2 = gapi.auth2.getAuthInstance();
+//     auth2.signOut().then(function () {
+//       console.log('User signed out.');
+//     });
+//   }
 
 
 // var ref = new Firebase("https://<YOUR-FIREBASE-APP>.firebaseio.com");
