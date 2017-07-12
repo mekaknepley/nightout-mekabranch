@@ -8,7 +8,10 @@ var config = {
   };
 
 var userCity = "";
+var userLat = "";
+var userLong = "";
 var firebaseUser;
+var map;
 
 //api.openweathermap.org/data/2.5/weather?q={city name}
 
@@ -58,9 +61,132 @@ $("#eventBriteButton").click(function(){
         method: "GET"
     }).done(function(data){
         console.log(data);
-        $("#eventBriteDescription0").html(data.events[0].name.html);
-        $("#eventBriteDescription1").html(data.events[1].name.html);
-        $("#eventBriteDescription2").html(data.events[2].name.html);
+        $("#eventBriteResults").empty();
+        for (var i = 0; i < data.events.length; i++) {
+            var newDiv=`<div>${data.events[i].name.html}</div>`
+            $("#eventBriteResults").append(newDiv);
+        }
+    });
+});
+
+$("#yelpButton").click(function(){
+    // Client ID
+// ImyIU6DHaqlzfq2Y-v7UPw
+// Client Secret
+// SOC31MI8AVBkGCnk6At0ScKs8qxdhl3CWtDfX7BF1OoTgSPBUbGONwhNb1i8Ozy1
+
+// $ curl -d "grant_type=client_credentials&client_id=ImyIU6DHaqlzfq2Y-v7UPw&client_secret=SOC31MI8AVBkGCnk6At0ScKs8qxdhl3CWtDfX7BF1OoTgSPBUbGONwhNb1i8Ozy1" -X POST https://api.yelp.com/oauth2/token
+// {"access_token": "8vBb2_Y61wo65MJ4u5jFEo489N4-aL6GKPYYhB8qZ59Sip_9ppmymC-Bo-j5maeBUrgT0Q78u4jTDz3LKxpm2oVq1QWOwwdfKsne69qVPidZh2Nu3dPBGRIhwylkWXYx", "expires_in": 15551999, "token_type": "Bearer"}
+    //  var token = "8vBb2_Y61wo65MJ4u5jFEo489N4-aL6GKPYYhB8qZ59Sip_9ppmymC-Bo-j5maeBUrgT0Q78u4jTDz3LKxpm2oVq1QWOwwdfKsne69qVPidZh2Nu3dPBGRIhwylkWXYx";
+    //  var queryURL = "https://api.yelp.com/v3/businesses/search/?term=food&location=Raleigh"
+    //  $.ajax({
+    //     url: queryURL,
+    //     headers: {"Authorization": "Bearer " + token}
+    // })           
+    // .done(function (data) {
+    //   console.log(data);
+    // })
+    // .fail(function (jqXHR, textStatus) {
+    //   alert("error: " + textStatus);
+    // });
+
+    // $.ajax({
+    // url      : 'http://api.yelp.com/business_review_search',
+    // dataType : 'jsonp',
+    // data     : {term : 'restaurant', lat : xxx, long : xxx}, // callback is not necessary
+    // success  : function(data) {
+    //     // data is a normal response shown on yelp's API page
+    //     console.log(data)
+    // }
+    // });
+});
+
+$("#zomatoButton").click(function(){
+//f7e75efc205df5df23b8ffa670aa0e7c
+});
+
+$("#fourSquareFoodButton").click(function(){
+    var clientId = "E2ASPJ0FPTMTQUB1RGYFICEWYIGTT2NG3CJXTREL4WXGQVZO";
+    var clientSecret = "EHEV5ED4QETVAL5QAS3EEKGBXZELL5QVG5XAPWQJY2R11HFO";
+
+    var location = encodeURIComponent(userCity);
+
+    var queryURL = `https://api.foursquare.com/v2/venues/explore?v=20170101&client_id=${clientId}&client_secret=${clientSecret}&near=${location}&intent=browse&section=food`;
+
+    console.log(queryURL);
+    $.ajax({
+         url: queryURL
+    })
+    .done(function(data){
+        console.log(data);
+    });
+});
+
+$("#fourSquareTrendingButton").click(function(){
+    var clientId = "E2ASPJ0FPTMTQUB1RGYFICEWYIGTT2NG3CJXTREL4WXGQVZO";
+    var clientSecret = "EHEV5ED4QETVAL5QAS3EEKGBXZELL5QVG5XAPWQJY2R11HFO";
+
+    var location = encodeURIComponent(userCity);
+
+    var queryURL = `https://api.foursquare.com/v2/venues/explore?v=20170101&client_id=${clientId}&client_secret=${clientSecret}&near=${location}&intent=browse&section=trending`;
+
+    console.log(queryURL);
+    $.ajax({
+         url: queryURL
+    })
+    .done(function(data){
+        console.log(data);
+    });
+});
+
+function createMarker(place) {
+    var placeLoc = place.geometry.location;
+    var marker = new google.maps.Marker({
+        map: map,
+        position: place.geometry.location
+    });
+
+    google.maps.event.addListener(marker, 'click', function() {
+        infowindow.setContent(place.name);
+        infowindow.open(map, this);
+    });
+}
+
+$("#googlePlacesButton").click(function(){
+
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode( { 'address': userCity}, function(results, status) {
+      if (status == 'OK') {
+        console.log(results);
+        userLat = results["0"].geometry.location.lat();
+        userLong = results["0"].geometry.location.lng();
+
+        var pyrmont = new google.maps.LatLng(userLat,userLong);
+        var request = {
+            location: pyrmont,
+            radius: '500',
+            type: ['restaurant']
+        };
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: results["0"].geometry.location,
+            zoom: 15
+        });
+        var service = new google.maps.places.PlacesService(map);
+        service.nearbySearch(request, function(results, status) {
+            console.log(results);
+            $("#googleResults").empty();
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+                for (var i = 0; i < results.length && i < 5; i++) {
+                    createMarker(results[i]);
+                    var newDiv=`<div>${results[i].name}</div>`
+                    $("#googleResults").append(newDiv);
+                }
+            }
+        });
+      }
+      else {
+
+      }
     });
 });
 
@@ -190,6 +316,20 @@ $("#weatherButton").click(function(){
     });
 });
 
+$("#meetUpButton").click(function(){
+    // api key for meetup 67126c723a751b543f227367b1f5954
+    var queryURL = "https://api.meetup.com/2/events?key=67126c723a751b543f227367b1f5954&group_urlname=ny-tech&sign=true";
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+         }).done(function(data){
+             console.log(data);
+         });
+});
+
+
+
+
 // $(".dateNightButton").click(function(){
 
 // })
@@ -199,9 +339,9 @@ $("#weatherButton").click(function(){
 // Client Secret
 // SOC31MI8AVBkGCnk6At0ScKs8qxdhl3CWtDfX7BF1OoTgSPBUbGONwhNb1i8Ozy1
 
-$(".dateNightButton").click(function(){
-    var queryURL = "";
-});
+// $(".dateNightButton").click(function(){
+//     var queryURL = "";
+// });
 
 
 //  function signOut() {
