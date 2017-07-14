@@ -1,3 +1,5 @@
+//firebase config with key
+
 var config = {
     apiKey: "AIzaSyDJBPs135vP7VHNPJKzdMZ39fRMXeyd8dY",
     authDomain: "nightout-81410.firebaseapp.com",
@@ -6,6 +8,8 @@ var config = {
     storageBucket: "nightout-81410.appspot.com",
     messagingSenderId: "1000413859626"
   };
+
+//global vars
 
 var userCity = "";
 var userLat = "";
@@ -51,6 +55,7 @@ firebase.auth().onAuthStateChanged(function(user) {
   }
 });
 
+// eventbrite button will show events in selected cities when button is clicked
 $("#eventBriteButton").click(function(){
     var token = "R6QQVF4RQTZXWE5XVPC5";
     // https://www.eventbriteapi.com/v3/events/search/?location.address=Raleigh&token=R6QQVF4RQTZXWE5XVPC5
@@ -69,37 +74,7 @@ $("#eventBriteButton").click(function(){
     });
 });
 
-$("#yelpButton").click(function(){
-    // Client ID
-// ImyIU6DHaqlzfq2Y-v7UPw
-// Client Secret
-// SOC31MI8AVBkGCnk6At0ScKs8qxdhl3CWtDfX7BF1OoTgSPBUbGONwhNb1i8Ozy1
 
-// $ curl -d "grant_type=client_credentials&client_id=ImyIU6DHaqlzfq2Y-v7UPw&client_secret=SOC31MI8AVBkGCnk6At0ScKs8qxdhl3CWtDfX7BF1OoTgSPBUbGONwhNb1i8Ozy1" -X POST https://api.yelp.com/oauth2/token
-// {"access_token": "8vBb2_Y61wo65MJ4u5jFEo489N4-aL6GKPYYhB8qZ59Sip_9ppmymC-Bo-j5maeBUrgT0Q78u4jTDz3LKxpm2oVq1QWOwwdfKsne69qVPidZh2Nu3dPBGRIhwylkWXYx", "expires_in": 15551999, "token_type": "Bearer"}
-    //  var token = "8vBb2_Y61wo65MJ4u5jFEo489N4-aL6GKPYYhB8qZ59Sip_9ppmymC-Bo-j5maeBUrgT0Q78u4jTDz3LKxpm2oVq1QWOwwdfKsne69qVPidZh2Nu3dPBGRIhwylkWXYx";
-    //  var queryURL = "https://api.yelp.com/v3/businesses/search/?term=food&location=Raleigh"
-    //  $.ajax({
-    //     url: queryURL,
-    //     headers: {"Authorization": "Bearer " + token}
-    // })           
-    // .done(function (data) {
-    //   console.log(data);
-    // })
-    // .fail(function (jqXHR, textStatus) {
-    //   alert("error: " + textStatus);
-    // });
-
-    // $.ajax({
-    // url      : 'http://api.yelp.com/business_review_search',
-    // dataType : 'jsonp',
-    // data     : {term : 'restaurant', lat : xxx, long : xxx}, // callback is not necessary
-    // success  : function(data) {
-    //     // data is a normal response shown on yelp's API page
-    //     console.log(data)
-    // }
-    // });
-});
 
 $("#zomatoButton").click(function(){
 //f7e75efc205df5df23b8ffa670aa0e7c
@@ -363,3 +338,35 @@ $("#meetUpButton").click(function(){
 //     });
 //   }
 // });
+
+$("#yelpButton").click(function(){
+    // Client ID
+// ImyIU6DHaqlzfq2Y-v7UPw
+// Client Secret
+// SOC31MI8AVBkGCnk6At0ScKs8qxdhl3CWtDfX7BF1OoTgSPBUbGONwhNb1i8Ozy1
+
+// $ curl -d "grant_type=client_credentials&client_id=ImyIU6DHaqlzfq2Y-v7UPw&client_secret=SOC31MI8AVBkGCnk6At0ScKs8qxdhl3CWtDfX7BF1OoTgSPBUbGONwhNb1i8Ozy1" -X POST https://api.yelp.com/oauth2/token
+// {"access_token": "8vBb2_Y61wo65MJ4u5jFEo489N4-aL6GKPYYhB8qZ59Sip_9ppmymC-Bo-j5maeBUrgT0Q78u4jTDz3LKxpm2oVq1QWOwwdfKsne69qVPidZh2Nu3dPBGRIhwylkWXYx", "expires_in": 15551999, "token_type": "Bearer"}
+    //  var token = "8vBb2_Y61wo65MJ4u5jFEo489N4-aL6GKPYYhB8qZ59Sip_9ppmymC-Bo-j5maeBUrgT0Q78u4jTDz3LKxpm2oVq1QWOwwdfKsne69qVPidZh2Nu3dPBGRIhwylkWXYx";
+    //  var queryURL = "https://api.yelp.com/v3/businesses/search/?term=food&location=Raleigh"
+    //  $.ajax({
+    //     url: queryURL,
+    //     headers: {"Authorization": "Bearer " + token}
+    // })           
+    // .done(function (data) {
+    //   console.log(data);
+    // })
+    // .fail(function (jqXHR, textStatus) {
+    //   alert("error: " + textStatus);
+    // });
+
+    // $.ajax({
+    // url      : 'http://api.yelp.com/business_review_search',
+    // dataType : 'jsonp',
+    // data     : {term : 'restaurant', lat : xxx, long : xxx}, // callback is not necessary
+    // success  : function(data) {
+    //     // data is a normal response shown on yelp's API page
+    //     console.log(data)
+    // }
+    // });
+});
