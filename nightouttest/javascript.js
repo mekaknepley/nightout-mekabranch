@@ -21,6 +21,7 @@ $(document).ready(function () {
 
     $('.parallax').parallax();
 
+    $("#results").hide();
 
 });
 
@@ -43,6 +44,7 @@ var userLat = "";
 var userLong = "";
 var firebaseUser;
 var map;
+var nightType = "random";
 
 //api.openweathermap.org/data/2.5/weather?q={city name}
 
@@ -101,31 +103,43 @@ $("#eventBriteButton").click(function(){
     });
 });
 
-
-
-// $("#zomatoButton").click(function(){
-// //f7e75efc205df5df23b8ffa670aa0e7c
-// });
-
-$("#fourSquareFoodButton").click(function(){
+function fourSquareDrinks()
+{
     var clientId = "E2ASPJ0FPTMTQUB1RGYFICEWYIGTT2NG3CJXTREL4WXGQVZO";
     var clientSecret = "EHEV5ED4QETVAL5QAS3EEKGBXZELL5QVG5XAPWQJY2R11HFO";
 
     var location = encodeURIComponent(userCity);
     //can update this with other elements 
     //for exmaple change the part below for the button for girls night to drinks instead of food
-    var queryURL = `https://api.foursquare.com/v2/venues/explore?v=20170101&client_id=${clientId}&client_secret=${clientSecret}&near=${location}&intent=browse&section=food`;
+    var queryURL = `https://api.foursquare.com/v2/venues/explore?v=20170101&client_id=${clientId}&client_secret=${clientSecret}&near=${location}&intent=browse&section=drinks`;
 
     console.log(queryURL);
     $.ajax({
          url: queryURL
     })
     .done(function(data){
-        console.log(data);
-    });
-});
+        //console.log(data);
+         var maxResults = 5;
+                
+        if (nightType == "girls")
+        {
+            maxResults = 2;
+        }
+        else if (nightType == "random")
+        {
+            maxResults = 3;
+        }
 
-$("#fourSquareTrendingButton").click(function(){
+        for (var i = 0; i < data.response.groups[0].items.length && i < maxResults; i++)
+        {
+            var newDiv=`<button class="eventDiv black-text">Drinks - ${data.response.groups[0].items[i].venue.name}</button>`;
+            $("#fourSquareDrinks").append(newDiv);
+        }
+    });
+}
+
+function fourSquareTrending()
+{
     var clientId = "E2ASPJ0FPTMTQUB1RGYFICEWYIGTT2NG3CJXTREL4WXGQVZO";
     var clientSecret = "EHEV5ED4QETVAL5QAS3EEKGBXZELL5QVG5XAPWQJY2R11HFO";
 
@@ -138,9 +152,25 @@ $("#fourSquareTrendingButton").click(function(){
          url: queryURL
     })
     .done(function(data){
-        console.log(data);
+        //console.log(data);
+        var maxResults = 5;
+                
+        if (nightType == "girls")
+        {
+            maxResults = 3;
+        }
+        else if (nightType == "random")
+        {
+            maxResults = 3;
+        }
+
+        for (var i = 0; i < data.response.groups[0].items.length && i < maxResults; i++)
+        {
+            var newDiv=`<button class="eventDiv black-text">Trendy Spot - ${data.response.groups[0].items[i].venue.name}</button>`;
+            $("#fourSquareTrending").append(newDiv);
+        }
     });
-});
+}
 
 function createMarker(place) {
     var placeLoc = place.geometry.location;
@@ -156,7 +186,11 @@ function createMarker(place) {
 }
 
 $("#googlePlacesButton").click(function(){
+    googlePlacesQuery();
+});
 
+function googlePlacesQuery()
+{
     var geocoder = new google.maps.Geocoder();
     geocoder.geocode( { 'address': userCity}, function(results, status) {
       if (status == 'OK') {
@@ -170,19 +204,30 @@ $("#googlePlacesButton").click(function(){
             radius: '500',
             type: ['restaurant']
         };
-        map = new google.maps.Map(document.getElementById('map'), {
+        map = new google.maps.Map(document.getElementById('googleMaps'), {
             center: results["0"].geometry.location,
             zoom: 15
         });
         var service = new google.maps.places.PlacesService(map);
         service.nearbySearch(request, function(results, status) {
-            console.log(results);
+            //console.log(results);
             $("#googleResults").empty();
             //returns up to 5 restaurnts potentially fewer 
             if (status === google.maps.places.PlacesServiceStatus.OK) {
-                for (var i = 0; i < results.length && i < 5; i++) {
+                var maxResults = 5;
+                
+                if (nightType == "girls")
+                {
+                    maxResults = 5;
+                }
+                else if (nightType == "random")
+                {
+                    maxResults = 3;
+                }
+
+                for (var i = 0; i < results.length && i < maxResults; i++) {
                     createMarker(results[i]);
-                    var newDiv=`<div>${results[i].name}</div>`
+                    var newDiv=`<button class="eventDiv black-text">Eat - ${results[i].name}</button>`;
                     $("#googleResults").append(newDiv);
                 }
             }
@@ -192,7 +237,8 @@ $("#googlePlacesButton").click(function(){
 
       }
     });
-});
+}
+
 //these are the signin-out authentication buttons for the modals (for one modal, link it to the ones on the menu)
 //double check from the slack convo 
 $("#signUpButton").click(function(){
@@ -400,3 +446,52 @@ $("#yelpButton").click(function(){
     // }
     // });
 });
+
+function weatherQuery()
+{
+    var queryURL = `https://api.apixu.com/v1/current.json?key=fabc133684694665aae31230171407&q=${encodeURIComponent(userCity)}`;
+    $.ajax({
+        url: queryURL
+    })
+    .done(function(data){
+        //console.log(data);
+        $("#preferredWeather").html(`${data.current.temp_f} Degrees ${data.current.condition.text}`);
+    })
+    .fail(function(jqXHR, textStatus)
+    {
+
+    })
+}
+
+$("#modalButton").click(function(){
+    $("#howItWorks").hide();
+    $("#results").show();
+
+    userCity = $("#userCity").val().trim();
+
+    // Save userCity to the database
+    if (firebaseUser != undefined) {
+        database.ref("users/" + firebaseUser.uid).set({
+            city: userCity
+        });
+    }
+
+    $("#preferredCity").html(userCity);
+    weatherQuery();
+    googlePlacesQuery();
+    fourSquareDrinks();
+    fourSquareTrending();
+})
+
+$("#girlsNight").click(function(){
+    nightType = "girls";
+})
+$("#guysNight").click(function(){
+    nightType = "guys"
+})
+$("#dateNight").click(function(){
+    nightType = "date"
+})
+$("#randomNight").click(function(){
+    nightType = "random"
+})

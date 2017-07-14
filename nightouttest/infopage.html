@@ -17,15 +17,15 @@
     <!--information for the navigation bar-->
     <nav class="grey darken-1" role="navigation">
         <div class="container">
-            <div class="nav-wrapper"><a id="logo-container" href="#" class="brand-logo">#NightOut</a>
+            <div class="nav-wrapper"><img id="logo-container" href="#" src="../nightouttest/assets/images/bk-1-Recovered.jpg" class="brand-logo">
                 <ul class="right">
-                    <li><a href="#" id="logIn">Login</a></li>
-                    <li><a href="#" id="logOut">Logout</a></li>
-                    <li><a href="#" id="signUp">Sign Up</a></li>
+                    <li><a class="btn modal-trigger" data-target="modal1" href="#" id="logIn">Login</a></li>
+                    <li><a href="#" id="logOut">LOGOUT</a></li>
+                    <li><a href="#" id="signUp">SIGN UP</a></li>
                 </ul>
 
                 <ul id="nav-mobile" class="side-nav">
-                    <li><a href="#" id="logIn">Login</a></li>
+                    <li><a class="btn modal-trigger" data-target="modal1" href="#" id="logIn">Login</a></li>
                     <li><a href="#" id="logOut">Logout</a></li>
                     <li><a href="#" id="signUp">Sign Up</a></li>
                 </ul>
@@ -36,7 +36,7 @@
 
 
     <!--   Icon Section   -->
-    <div class="background">
+    <div id="howItWorks" class="background">
         <div class="row">
             <br><br>
             <h4 class="header center white-text">How Night Out Works</h4>
@@ -68,6 +68,7 @@
             </div>
 
         </div>
+
         <br><br>
 
         <!-- Modal Trigger -->
@@ -97,7 +98,7 @@
                     </form>
                 </div>
                 <!--    <div class="modal-footer center"> -->
-                <a id="modalButton" class="modal-action modal-close waves-effect waves-red btn-flat" href="resultspage.html">Let's Go!</a>
+                <a id="modalButton" class="modal-action modal-close waves-effect waves-red btn-flat">Let's Go!</a>
                 <!--  </div> -->
             </div>
             <br><br>
@@ -105,6 +106,49 @@
 
 
     </div>
+
+    
+        <div id="results" class="section black">
+            <div id="holder" class="row container">
+
+                <!--displays the city user inputs GOES HERE-->
+                <div id="city">
+                    <p id="preferredCity">Philadelphia</p>
+                </div>
+
+                <!--displays Weather in city user inputs GOES HERE-->
+                <div id="weather">
+                    <p id="preferredWeather">50 Degrees</p>
+                </div>
+
+                <!--displays google Maps user inputs GOES HERE-->
+                <div id="googleMaps"></div>
+                <p class=" center white-text text-darken-3 lighten-3" style="font-size: 30px; text-shadow: 2px 2px #1d1c1c;">SELECT YOUR EVENTS FROM THE RESULTS BELOW</p>
+                <!--EVENTS GO HERE-->
+                <div class="eventContainer">
+                    <div id="googleResults">
+                    </div>
+                    <div id="fourSquareDrinks">
+                    </div>
+                    <div id="fourSquareTrending">
+                    </div>
+                    <!--<button class="eventDiv black-text" id="eventOne">1</button>
+                    <button class="eventDiv black-text" id="eventTwo">2</button>
+                    <button class="eventDiv black-text" id="eventThree">3</button>
+                    <button class="eventDiv black-text" id="eventFour">4</button>
+                    <button class="eventDiv black-text" id="eventFive">5</button>
+                    <button class="eventDiv black-text" id="eventSix">6</button>
+                    <button class="eventDiv black-text" id="eventSeven">7</button>
+                    <button class="eventDiv black-text" id="eventEight">8</button>
+                    <button class="eventDiv black-text" id="eventNine">9</button>
+                    <button class="eventDiv black-text" id="eventTen">10</button>-->
+                </div>
+            </div>
+        </div>
+
+    
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLrZMmutAL6ueD9VpTwaZ9aH91pbNamDU&libraries=places" async defer></script>
+ 
     <!--Firebase link-->
     <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
     <!-- Main JQuery source-->
@@ -112,13 +156,8 @@
     <!-- Materialize CSS -->
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
-
-    <!-- Compiled and minified Materialize JavaScript -->
-    <!--    <script src="assets/materialize/js/materialize.min.js"></script> -->
     <!-- Main Javascript Source-->
     <script src="javascript.js"></script>
-    <!--Firebase link-->
-    <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
 </body>
 
 </html>
