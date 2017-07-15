@@ -370,10 +370,13 @@ function googlePlacesQuery()
 
 //these are the signin-out authentication buttons for the modals (for one modal, link it to the ones on the menu)
 //double check from the slack convo 
-$("#signUpButton").click(function(){
-    var email = $("#emailInput").val().trim();
-    var password = $("#passwordInput").val().trim();
-    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+$("#modalCreate").click(function(){
+    var email = $("#modalEmailSignUp").val().trim();
+    var password = $("#modalPassSignUp").val().trim();
+    firebase.auth().createUserWithEmailAndPassword(email, password).then(function(){
+        console.log("created account");
+        $("#signUpModal").modal('close');
+        }).catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
@@ -391,13 +394,12 @@ $(".logOut").click(function(){
     });
 });
 
-$("#signInForm").submit(function(event){
+$("#modalSignIn").click(function(event){
     event.preventDefault();
-    var email = $("#emailInput").val().trim();
-    var password = $("#passwordInput").val().trim();
+    var email = $("#modalEmail").val().trim();
+    var password = $("#modalPass").val().trim();
     firebase.auth().signInWithEmailAndPassword(email, password).then(function(result){
         $("#signInModal").modal('close');
-        $("#signUpModal").modal('close');
     }).catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;

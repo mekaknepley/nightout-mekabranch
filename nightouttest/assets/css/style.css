@@ -127,8 +127,17 @@ footer {
     border-radius: 5px;
     width: 500px;
 }
-
+#modalEmailSignUp {
+    background-color: white;
+    border-radius: 5px;
+    width: 500px;
+}
 #modalPass {
+    background-color: white;
+    border-radius: 5px;
+    width: 500px;
+}
+#modalPassSignUp {
     background-color: white;
     border-radius: 5px;
     width: 500px;
@@ -171,6 +180,36 @@ footer {
 }
 
 #modalGoo {
+    background-color: #fc4e24;
+    width: 220px;
+    color: white;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 8px;
+    margin: 5px;
+}
+
+#modalFaceSignUp {
+    background-color: dodgerblue;
+    width: 220px;
+    color: white;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 8px;
+    margin: 5px;
+}
+
+#modalTwitSignUp {
+    background-color: #30bfff;
+    width: 220px;
+    color: white;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 8px;
+    margin: 5px;
+}
+
+#modalGooSignUp {
     background-color: #fc4e24;
     width: 220px;
     color: white;
