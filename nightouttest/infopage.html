@@ -3,7 +3,7 @@
 <html>
 
 <head>
-    <title>Night Out - How It Works</title>
+    <title>Night Out</title>
     <link rel="icon" type="image/png" href="assets/images/cross-coders.png" />
     <!-- Materialize CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
@@ -14,28 +14,52 @@
 </head>
 
 <body>
-    <!--information for the navigation bar-->
-    <nav class="grey darken-1" role="navigation">
-        <div class="container">
-            <div class="nav-wrapper"><img id="logo-container" href="#" src="../nightouttest/assets/images/bk-1-Recovered.jpg" class="brand-logo">
-                <ul class="right">
-                    <li><a class="btn modal-trigger" data-target="modal1" href="#" id="logIn">Login</a></li>
-                    <li><a href="#" id="logOut">LOGOUT</a></li>
-                    <li><a href="#" id="signUp">SIGN UP</a></li>
-                </ul>
 
-                <ul id="nav-mobile" class="side-nav">
-                    <li><a class="btn modal-trigger" data-target="modal1" href="#" id="logIn">Login</a></li>
-                    <li><a href="#" id="logOut">Logout</a></li>
-                    <li><a href="#" id="signUp">Sign Up</a></li>
-                </ul>
-                <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-            </div>
+
+
+     <!--carousel-->
+    <div id="introPage">
+    <div class="row">
+        <div class="carousel carousel-slider">
+            <a class="carousel-item" href="#three!"><img src="assets/images/bk-2.jpg"></a>
+            <a class="carousel-item" href="#one!"><img src="assets/images/landingpageimage.png"></a>
+            <a class="carousel-item" href="#three!"><img src="assets/images/bk-3.jpg"></a>
         </div>
-    </nav>
+    </div>
+    
+    <br>
+
+    <!--create your own experience button-->
+    <div class="row center">
+        <div class="buttonContainer">
+            <button class="waves-effect waves-light btn-large grey" id="experienceButton"><a id="homePageButton">Create Your Experience</a></button>
+        </div>
+    </div>
+    </div>
 
 
     <!--   Icon Section   -->
+    <div id="howItWorksWrapper">
+        <!--information for the navigation bar-->
+        <nav class="grey darken-1" role="navigation">
+            <div class="container">
+                <div class="nav-wrapper"><img id="logo-container" href="#" src="../nightouttest/assets/images/bk-1-Recovered.jpg" class="brand-logo">
+                    <ul class="right">
+                        <li><a class="btn modal-trigger" data-target="modal1" href="#" id="logIn">Login</a></li>
+                        <li><a href="#" id="logOut">LOGOUT</a></li>
+                        <li><a href="#" id="signUp">SIGN UP</a></li>
+                    </ul>
+
+                    <ul id="nav-mobile" class="side-nav">
+                        <li><a class="btn modal-trigger" data-target="modal1" href="#" id="logIn">Login</a></li>
+                        <li><a href="#" id="logOut">Logout</a></li>
+                        <li><a href="#" id="signUp">Sign Up</a></li>
+                    </ul>
+                    <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+                </div>
+            </div>
+        </nav>
+
     <div id="howItWorks" class="background">
         <div class="row">
             <br><br>
@@ -98,7 +122,7 @@
                     </form>
                 </div>
                 <!--    <div class="modal-footer center"> -->
-                <a id="modalButton" class="modal-action modal-close waves-effect waves-red btn-flat">Let's Go!</a>
+                <a id="letsGoButton" class="modal-action modal-close waves-effect waves-red btn-flat">Let's Go!</a>
                 <!--  </div> -->
             </div>
             <br><br>
@@ -113,12 +137,12 @@
 
                 <!--displays the city user inputs GOES HERE-->
                 <div id="city">
-                    <p id="preferredCity">Philadelphia</p>
+                    <p id="preferredCity"></p>
                 </div>
 
                 <!--displays Weather in city user inputs GOES HERE-->
                 <div id="weather">
-                    <p id="preferredWeather">50 Degrees</p>
+                    <p id="preferredWeather"></p>
                 </div>
 
                 <!--displays google Maps user inputs GOES HERE-->
@@ -132,16 +156,14 @@
                     </div>
                     <div id="fourSquareTrending">
                     </div>
-                    <!--<button class="eventDiv black-text" id="eventOne">1</button>
-                    <button class="eventDiv black-text" id="eventTwo">2</button>
-                    <button class="eventDiv black-text" id="eventThree">3</button>
-                    <button class="eventDiv black-text" id="eventFour">4</button>
-                    <button class="eventDiv black-text" id="eventFive">5</button>
-                    <button class="eventDiv black-text" id="eventSix">6</button>
-                    <button class="eventDiv black-text" id="eventSeven">7</button>
-                    <button class="eventDiv black-text" id="eventEight">8</button>
-                    <button class="eventDiv black-text" id="eventNine">9</button>
-                    <button class="eventDiv black-text" id="eventTen">10</button>-->
+                    <div id="fourSquareSights">
+                    </div>
+                    <div id="fourSquareCoffee">
+                    </div>
+                    <div id="fourSquareArts">
+                    </div>
+                    <div id="eventBriteResults">
+                    </div>
                 </div>
             </div>
         </div>
