@@ -91,7 +91,7 @@ function eventButtonClicked(button) {
         numEventsPicked++;
     }
 
-    if (numEventsPicked == 4) {
+    if (numEventsPicked == 3) {
         $(".eventClicked").each(function(index){
             $("#results"+index).html($(this).html());
         })
@@ -388,8 +388,8 @@ $("#modalCreate").click(function(){
 
 $(".logOut").click(function(){
     firebase.auth().signOut().then(function() {
-    // Sign-out successful.
-    firebaseUser = undefined;
+        // Sign-out successful.
+        firebaseUser = undefined;
     }).catch(function(error) {
         
     });
@@ -418,6 +418,8 @@ $(".signInFaceBook").click(function(){
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
+        $("#signInErrorText").html(error.message);
+        $("#signUpErrorText").html(error.message);
         // The email of the user's account used.
         var email = error.email;
         // The firebase.auth.AuthCredential type that was used.
@@ -435,6 +437,8 @@ $(".signInTwitter").click(function(){
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
+        $("#signInErrorText").html(error.message);
+        $("#signUpErrorText").html(error.message);
         // The email of the user's account used.
         var email = error.email;
         // The firebase.auth.AuthCredential type that was used.
@@ -453,6 +457,8 @@ $(".signInGoogle").click(function(){
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
+        $("#signInErrorText").html(error.message);
+        $("#signUpErrorText").html(error.message);
         // The email of the user's account used.
         var email = error.email;
         // The firebase.auth.AuthCredential type that was used.
@@ -522,18 +528,30 @@ $("#letsGoButton").click(function(){
 $("#girlsNight").click(function(){
     nightType = "girls";
     $("#userCity").val(userCity);
+    if (userCity != undefined && userCity != "") {
+        Materialize.updateTextFields();
+    }
 })
 $("#guysNight").click(function(){
     nightType = "guys";
     $("#userCity").val(userCity);
+    if (userCity != undefined && userCity != "") {
+        Materialize.updateTextFields();
+    }
 })
 $("#dateNight").click(function(){
     nightType = "date";
     $("#userCity").val(userCity);
+    if (userCity != undefined && userCity != "") {
+        Materialize.updateTextFields();
+    }
 })
 $("#randomNight").click(function(){
     nightType = "random";
     $("#userCity").val(userCity);
+    if (userCity != undefined && userCity != "") {
+        Materialize.updateTextFields();
+    }
 })
 
 //https://stackoverflow.com/questions/400212/how-do-i-copy-to-the-clipboard-in-javascript
@@ -600,4 +618,18 @@ $("#clipboard").click(function(){
         clipText += $(this).html() + "\n";
     })
     copyTextToClipboard(clipText);
+})
+
+$("#close").click(function(){
+    $("#howItWorks").show();
+    $("#results").hide();
+    $("#doneModal").modal('close');
+    numEventsPicked = 0;
+    $("#googleResults").empty();
+    $("#fourSquareDrinks").empty();
+    $("#fourSquareTrending").empty();
+    $("#fourSquareSights").empty();
+    $("#fourSquareCoffee").empty();
+    $("#fourSquareArts").empty();
+    $("#eventBriteResults").empty();
 })

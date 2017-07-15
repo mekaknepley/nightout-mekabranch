@@ -291,14 +291,21 @@ footer {
     background-size: cover;
 }
 
-#clipboardImage {
-    margin-left: 220px;
-}
-
 #lastContainer {
     padding: 20px;
 }
 
 .eventClicked {
     background: url("../images/pinkpurple.jpeg") repeat center center fixed;
+}
+
+.clipboardContainer {
+    font-size: 30px;
+    text-shadow: 2px 2px #000000;
+    color: white;
+    margin-top: 260px; 
+}
+
+#doneModal {
+    background: url("../images/clipboard.png") no-repeat center center fixed;
 }
