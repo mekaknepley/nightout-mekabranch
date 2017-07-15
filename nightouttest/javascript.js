@@ -496,10 +496,25 @@ $("#experienceButton").click(function(){
 });
 
 $("#letsGoButton").click(function(){
+    userCity = $("#userCity").val().trim();
+
+    var letterOnly = /^([^0-9]*)$/.test(userCity);
+    if (!letterOnly) {
+        $("#enterCity").html("Enter Your City - Numbers Are Not Allowed In City Names");
+        return;
+    }
+
+    if (userCity.length == 0) {
+        $("#enterCity").html("Enter Your City - Please Enter A City");
+        return;
+    }
+
+    $("#enterCity").html("Enter Your City");
+
     $("#howItWorks").hide();
     $("#results").show();
+    $("#modalLocation").modal('close');
 
-    userCity = $("#userCity").val().trim();
 
     // Save userCity to the database
     if (firebaseUser != undefined) {
