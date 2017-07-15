@@ -380,6 +380,7 @@ $("#modalCreate").click(function(){
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
+        $("#signUpErrorText").html(error.message);
   // ...
     });
 
@@ -404,7 +405,7 @@ $("#modalSignIn").click(function(event){
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
-        // ...
+        $("#signInErrorText").html(error.message);
     });
 });
 

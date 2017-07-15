@@ -153,10 +153,17 @@ footer {
 }
 
 #modalLocation {
-    background: url("../images/locationImage.jpeg")no-repeat center center fixed;
-    background-size: cover;
+    
+    background-color: gray;
     color: white;
     border-radius: 15px;
+}
+
+#modalLocationBackground {
+    float: left;
+    position: relative;
+    left: -400px;
+    top: -130px;
 }
 
 #modalFace {
