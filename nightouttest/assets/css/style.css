@@ -251,6 +251,10 @@ footer {
     background: none !important;
 }
 
+#logInMobile {
+    background: none !important;
+}
+
 #holder {
     background: url("../images/page3-background.jpg")no-repeat center center fixed;
     background-size: cover;

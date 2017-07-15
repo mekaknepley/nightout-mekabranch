@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<html>
 
 <head>
     <title>Night Out</title>
@@ -21,9 +20,9 @@
     <div id="introPage">
     <div class="row">
         <div class="carousel carousel-slider">
-            <a class="carousel-item" href="#three!"><img src="assets/images/bk-2.jpg"></a>
-            <a class="carousel-item" href="#one!"><img src="assets/images/landingpageimage.png"></a>
-            <a class="carousel-item" href="#three!"><img src="assets/images/bk-3.jpg"></a>
+            <a class="carousel-item" href="#three!"><img src="assets/images/bk-2.jpg" alt="bg"></a>
+            <a class="carousel-item" href="#one!"><img src="assets/images/landingpageimage.png" alt="bg"></a>
+            <a class="carousel-item" href="#three!"><img src="assets/images/bk-3.jpg" alt="bg"></a>
         </div>
     </div>
     
@@ -32,7 +31,7 @@
     <!--create your own experience button-->
     <div class="row center">
         <div class="buttonContainer">
-            <button class="waves-effect waves-light btn-large grey" id="experienceButton"><a id="homePageButton">Create Your Experience</a></button>
+            <button class="waves-effect waves-light btn-large grey" id="experienceButton">Create Your Experience</button>
         </div>
     </div>
     </div>
@@ -43,17 +42,17 @@
         <!--information for the navigation bar-->
         <nav class="grey darken-1" role="navigation">
             <div class="container">
-                <div class="nav-wrapper"><img id="logo-container" href="#" src="../nightouttest/assets/images/bk-1-Recovered.jpg" class="brand-logo">
+                <div class="nav-wrapper"><img id="logo-container" src="assets/images/bk-1-Recovered.jpg" class="brand-logo">
                     <ul class="right">
                         <li class="loginButtonClass"><a class="btn modal-trigger" data-target="signInModal" href="#" id="logIn">Login</a></li>
                         <li class="logoutButtonClass"><a class="logOut">Log Out</a></li>
-                        <li class="signUpButtonClass"><a id="signUp" data-target="signUpModal">SIGN UP</a></li>
+                        <li class="signUpButtonClass"><a data-target="signUpModal">SIGN UP</a></li>
                     </ul>
 
                     <ul id="nav-mobile" class="side-nav">
-                        <li class="loginButtonClass"><a class="btn modal-trigger" data-target="modal1" href="#" id="logIn">Login</a></li>
+                        <li class="loginButtonClass"><a class="btn modal-trigger" data-target="modal1" href="#" id="logInMobile">Login</a></li>
                         <li class="logoutButtonClass"><a class="logOut">Log out</a></li>
-                        <li class="signUpButtonClass"><a id="signUp">Sign Up</a></li>
+                        <li class="signUpButtonClass"><a data-target="signUpModal">Sign Up</a></li>
                     </ul>
                     <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
                 </div>
@@ -98,10 +97,10 @@
         <!-- Modal Trigger -->
         <div class="row center">
             <div class="buttonContainer">
-                <button class="btn modal-trigger" data-target="modalLocation" class="waves-effect waves-light btn-large grey" id="girlsNight">Girls Night</button>
-                <button class="btn modal-trigger" data-target="modalLocation" class="waves-effect waves-light btn-large grey" id="guysNight">Guys Night</button>
-                <button class="btn modal-trigger" data-target="modalLocation" class="waves-effect waves-light btn-large grey" id="dateNight">Date Night</button>
-                <button class="btn modal-trigger" data-target="modalLocation" class="waves-effect waves-light btn-large grey" id="randomNight">Random Night</button>
+                <button data-target="modalLocation" class="btn modal-trigger waves-effect waves-light btn-large grey" id="girlsNight">Girls Night</button>
+                <button data-target="modalLocation" class="btn modal-trigger waves-effect waves-light btn-large grey" id="guysNight">Guys Night</button>
+                <button data-target="modalLocation" class="btn modal-trigger waves-effect waves-light btn-large grey" id="dateNight">Date Night</button>
+                <button data-target="modalLocation" class="btn modal-trigger waves-effect waves-light btn-large grey" id="randomNight">Random Night</button>
             </div>
         </div>
 
@@ -144,11 +143,11 @@
                 </div>
             </div>
         </div>
-
+    </div>
 
         <!-- Modal Structure -->
         <div id="modalLocation" class="modal modal-fixed-footer">
-            <img id="modalLocationBackground" src="assets/images/locationImage.jpeg">
+            <img id="modalLocationBackground" src="assets/images/locationImage.jpeg" alt="bg">
             <div class="modal-content">
                 <h4 id="enterCity">Enter Your City</h4>
                 <div class="row">
@@ -218,9 +217,6 @@
             <div id="results2"></div>
         </div>
 
-        <!-----------------
-            YO BUTTONS
-        -------------------->
         <div id="lastContainer" class="center">
             <button id="close">CLOSE</button>
         </div>
