@@ -116,7 +116,7 @@ footer {
 =========================================================*/
 
 .authModal {
-    background: url("../../../project1/assets/images/modal-background.jpg")no-repeat center center fixed;
+    background: url("../assets/images/modal-background.jpg")no-repeat center center fixed;
     background-size: cover;
     border-radius: 8px;
     opacity: 0.8;
